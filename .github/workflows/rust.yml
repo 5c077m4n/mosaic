@@ -11,9 +11,7 @@ env:
 
 jobs:
   build:
-
     runs-on: ubuntu-latest
-
     steps:
     - uses: actions/checkout@v2
     - name: Build
@@ -30,9 +28,17 @@ jobs:
           profile: minimal
           toolchain: stable
           override: true
-      - run: rustup component add rustfmt
-      - uses: actions-rs/cargo@v1
+  clippy:
+    name: Clippy
+    runs-on: ubuntu-latest
+    steps:
+      - name: Install cargo-make
+        uses: actions-rs/cargo@v1
         with:
-          command: fmt
-          args: --all -- --check
-
+          command: install
+          args: --force --debug cargo-make
+      - name: Run clippy
+        uses: actions-rs/cargo@v1
+        with:
+          command: make
+          args: clippy
