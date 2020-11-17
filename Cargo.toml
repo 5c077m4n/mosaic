@@ -26,3 +26,4 @@ features = ["unstable"]
 
 [dev-dependencies]
 insta = "0.16.1"
+rusty-hook = { version = "0.11" }
